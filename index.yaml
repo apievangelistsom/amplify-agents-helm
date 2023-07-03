@@ -12,6 +12,6 @@ entries:
     name: apigee-discovery
     type: application
     urls:
-    - https://github.com/apievangelistsom/amplify-agents-helm/charts/apigee-discovery-0.1.0.tgz
+    - https://apievangelistsom.github.io/amplify-agents-helm/charts/apigee-discovery-0.1.0.tgz
     version: 0.1.0
 generated: "2023-07-03T06:44:33.663680814Z"
