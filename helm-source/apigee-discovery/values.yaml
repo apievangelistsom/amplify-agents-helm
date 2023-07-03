@@ -1,0 +1,114 @@
+# Default values for apigee-discovery.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  defaultRegistry: axway.jfrog.io/ampc-public-docker-release/agent/v7-discovery-agent
+
+replicaCount: 1
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.1.52"
+  registry: axway.jfrog.io/ampc-public-docker-release/agent/v7-discovery-agent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  CENTRAL_URL: https://central.ap-sg.axway.com
+  CENTRAL_ORGANIZATIONID: "<ORGANIZATION_ID>"
+  CENTRAL_TEAM: "<TEAM>"
+  CENTRAL_ENVIRONMENT: "<ENVIRONMENT_NAME>"
+  CENTRAL_AGENTNAME: "<AGENT_NAME>"
+  CENTRAL_SINGLEURL: https://ingestion-ap-sg.platform.axway.com
+
+  CENTRAL_AUTH_URL: https://login.axway.com/auth
+  CENTRAL_AUTH_CLIENTID: "<CLIENT_ID>"
+  CENTRAL_AUTH_TIMEOUT: 60s
+
+  APIGEE_ORGANIZATION: "<APIGEE_ORGANIZATION>"
+  APIGEE_DEVELOPERID: "APIGEE_DEVELOPERID"
+  APIGEE_DISCOVERYMODE: "product | proxie"
+  #APIGEE_FILTER: tag.Amplify==true
+  #APIGEE_FILTER: tag.Amplify.Exists()==true
+  APIGEE_CLONEATTRIBUTES: true
+  APIGEE_WORKERS_PRODUCT: 20
+
+  # enable the gRPC communication with Amplify platform. Be sure the http/2 connectivity is allowed to cross your firewall/proxy if any.
+  CENTRAL_GRPC_ENABLED: true
+  # activate the Marketplace provisioning feature
+  AGENTFEATURES_MARKETPLACEPROVISIONING: true
+  # enable to store a cache locally when agent is stopped. It enables the agent to resume his treatment from where it left when restarting.
+  # AGENTFEATURES_PERSISTCACHE: true
+
+  LOG_LEVEL: info
+  LOG_OUTPUT: stdout
+
+# The below secret are a pre-requisite. Please refer to the readme file for more info on it.
+secrets:
+  credentials: "apigee-agents-creds"
+  keys: "apigee-agents-keys"
+
+service:
+  name: apigee-discovery
+  type: ClusterIP
+  port: 8989
+  targetport: 28989
+
+ingress:
+  enabled: false
+
+podSecurityContext:
+  supplementalGroups: [2500]
+  fsGroupChangePolicy: "OnRootMismatch"
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

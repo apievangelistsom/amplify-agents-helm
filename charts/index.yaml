@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  apigee-discovery:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-07-03T06:44:33.665736204Z"
+    description: A Helm chart for Kubernetes
+    digest: 14812b28f3a716f245454064585697ff73a17c940bba6a8f534b9eeca6ef3752
+    maintainers:
+    - email: sosharma@axway.com
+      name: Somdutt Sharma
+    name: apigee-discovery
+    type: application
+    urls:
+    - https://github.com/apievangelistsom/amplify-agents-helm/charts/apigee-discovery-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-07-03T06:44:33.663680814Z"
