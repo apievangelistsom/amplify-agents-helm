@@ -75,8 +75,6 @@ spec:
           volumeMounts:
             - name: "discovery-keys-secrets"
               mountPath: "/keys"
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
       - name: discovery-keys-secrets
         secret:
@@ -86,8 +84,8 @@ spec:
             path: private_key.pem
           - key: public_key
             path: public_key.pem
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+      resources:
+        {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
