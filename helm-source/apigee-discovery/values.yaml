@@ -7,11 +7,11 @@ global:
 replicaCount: 1
 
 image:
-  repository: ""
+  repository: "206171590938.dkr.ecr.ap-southeast-1.amazonaws.com/amplify-agents"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.1.52"
-  registry: axway.jfrog.io/ampc-public-docker-release/agent/v7-discovery-agent
+  tag: "apigee-discovery-agent-1.0.0"
+  registry: 206171590938.dkr.ecr.ap-southeast-1.amazonaws.com/amplify-agents
 
 imagePullSecrets: []
 nameOverride: ""
@@ -56,7 +56,7 @@ service:
   name: apigee-discovery
   type: ClusterIP
   port: 8989
-  targetport: 28989
+  targetport: 8989
 
 ingress:
   enabled: false
@@ -99,6 +99,19 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+livenessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
 
 autoscaling:
   enabled: false

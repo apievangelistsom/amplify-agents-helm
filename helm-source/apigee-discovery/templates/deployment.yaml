@@ -35,24 +35,26 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - name: probe-port
-            containerPort: 8989
+            containerPort: {{ .Values.statusPort }}
             protocol: TCP
           livenessProbe:
             httpGet:
               path: /status
               port: probe-port
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
+            {{- with .Values.livenessProbe }}
+            {{- range $key, $value := . }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+            {{- end }}
           readinessProbe:
             httpGet:
               path: /status
               port: probe-port
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 5
+            {{- with .Values.readinessProbe }}
+            {{- range $key, $value := . }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+            {{- end }}
           env:
           {{- with .Values.env }}
           {{- range $key, $value := . }}
@@ -75,6 +77,8 @@ spec:
           volumeMounts:
             - name: "discovery-keys-secrets"
               mountPath: "/keys"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
       - name: discovery-keys-secrets
         secret:
@@ -84,8 +88,6 @@ spec:
             path: private_key.pem
           - key: public_key
             path: public_key.pem
-      resources:
-        {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

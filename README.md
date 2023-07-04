@@ -16,10 +16,15 @@
 * Describe any prerequisites, libraries, OS version, etc., needed before installing program.
 * ex. Windows 10
 
-### Installing
+### Adding new chart or versioning
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* update chart version in chart.yaml 
+* helm package apigee-discovery
+* helm lint apigee-discovery-<version>.tgz
+* move the chart apigee-discovery-<version>.tgz to ./chart folder and verify the permisions
+* helm repo index --url https://apievangelistsom.github.io/amplify-agents-helm/charts --merge index.yaml .
+* commit and push
+
 
 ### Executing program
 
@@ -53,7 +58,7 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 
 ## RoadMap
 - [x] Apigee-discovery-agent
-- [x] Apigee-traceability-agent
+- [ ] Apigee-traceability-agent
 
 - [ ] To-Do list
     - [ ] ABC agent
