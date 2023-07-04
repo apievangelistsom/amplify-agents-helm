@@ -17,6 +17,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+# Health Check port
+statusPort: 8989
+
 env:
   CENTRAL_URL: https://central.ap-sg.axway.com
   CENTRAL_ORGANIZATIONID: "<ORGANIZATION_ID>"
