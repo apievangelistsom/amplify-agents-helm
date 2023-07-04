@@ -3,9 +3,22 @@ entries:
   apigee-discovery:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-03T11:01:46.094807756Z"
+    created: "2023-07-04T07:36:00.532076731Z"
     description: A Helm chart to deploy apigee discovery agent using secrets
-    digest: 9c8a3624c6c2a6fda46c4d38e0f2fdcca72ff6c5c504b549829133b5e691b04b
+    digest: b4acfa722e540730e947885915515bd779f86c1cb63ecb12e5d5f4228a751300
+    maintainers:
+    - email: sosharma@axway.com
+      name: Somdutt Sharma
+    name: apigee-discovery
+    type: application
+    urls:
+    - https://apievangelistsom.github.io/amplify-agents-helm/charts/apigee-discovery-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-07-04T07:36:00.530105132Z"
+    description: A Helm chart to deploy apigee discovery agent using secrets
+    digest: 2da4613c079004c6b89a71736e0527be69bb86269ee65c436e1e292d62a63ae3
     maintainers:
     - email: sosharma@axway.com
       name: Somdutt Sharma
@@ -16,7 +29,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-03T11:01:46.093383903Z"
+    created: "2023-07-04T07:36:00.529254239Z"
     description: A Helm chart for Kubernetes
     digest: 14812b28f3a716f245454064585697ff73a17c940bba6a8f534b9eeca6ef3752
     maintainers:
@@ -27,4 +40,4 @@ entries:
     urls:
     - https://apievangelistsom.github.io/amplify-agents-helm/charts/apigee-discovery-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-03T11:01:46.092426058Z"
+generated: "2023-07-04T07:36:00.528270184Z"
