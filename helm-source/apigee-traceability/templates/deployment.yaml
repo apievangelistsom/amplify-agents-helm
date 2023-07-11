@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "apigee-traceability.fullname" . }}
+  labels:
+    {{- include "apigee-traceability.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "apigee-traceability.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "apigee-traceability.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "apigee-traceability.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - name: probe-port
+            containerPort: {{ .Values.statusPort }}
+            protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: probe-port
+            {{- with .Values.livenessProbe }}
+            {{- range $key, $value := . }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: probe-port
+            {{- with .Values.readinessProbe }}
+            {{- range $key, $value := . }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+            {{- end }}
+          env:
+          {{- with .Values.env }}
+          {{- range $key, $value := . }}
+          {{- if and (not (eq (toString $value) "")) (not (eq (toString $key) "")) }} # ignore any items with empty key or value
+            - name: {{ $key }}
+              value: {{ $value | quote }} 
+          {{- end }}
+          {{- end }}
+          {{- end }}
+            - name: APIGEE_AUTH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.credentials }}
+                  key: APIGEE_AUTH_USERNAME
+            - name: APIGEE_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.credentials }}
+                  key: APIGEE_AUTH_PASSWORD
+          volumeMounts:
+            - name: "discovery-keys-secrets"
+              mountPath: "/keys"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: discovery-keys-secrets
+        secret:
+          secretName: {{ .Values.secrets.keys }}
+          items:
+          - key: private_key
+            path: private_key.pem
+          - key: public_key
+            path: public_key.pem
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

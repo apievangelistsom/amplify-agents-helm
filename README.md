@@ -10,6 +10,10 @@
 </div>
 
 ## Getting Started
+Apigee : https://github.com/Axway/agents-apigee#setup-agent-environment-variables
+Apigee-Discovery : https://github.com/Axway/agents-apigee/blob/main/discovery/README.md
+Apigee-Traceability : https://github.com/Axway/agents-apigee/blob/main/traceability/README.md#traceability-agent-variables
+
 
 ### Dependencies
 
@@ -58,7 +62,7 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 
 ## RoadMap
 - [x] Apigee-discovery-agent
-- [ ] Apigee-traceability-agent
+- [x] Apigee-traceability-agent
 
 - [ ] To-Do list
     - [ ] ABC agent
