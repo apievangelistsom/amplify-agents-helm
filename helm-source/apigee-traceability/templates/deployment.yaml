@@ -77,9 +77,14 @@ spec:
           volumeMounts:
             - name: "discovery-keys-secrets"
               mountPath: "/keys"
+            - name: data
+              mountPath: /data
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistentVolumeClaimConfig.data.name }}
       - name: discovery-keys-secrets
         secret:
           secretName: {{ .Values.secrets.keys }}

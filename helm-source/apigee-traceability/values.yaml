@@ -80,8 +80,10 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 2500
+  supplementalGroups: [2500]
+  fsGroupChangePolicy: "OnRootMismatch"
 
 securityContext: {}
   # capabilities:
@@ -97,6 +99,12 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+persistentVolumeClaimConfig:
+  data:
+    # storage class to persist contents of data directory in the agent - should be available in the cluster i.e gp2, gp2-csi, default
+    storageClass: efs-sc
+    name: data-claim
 
 livenessProbe:
   initialDelaySeconds: 30

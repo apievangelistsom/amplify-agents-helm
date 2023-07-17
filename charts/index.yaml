@@ -3,7 +3,7 @@ entries:
   apigee-discovery:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-11T04:32:36.260209686Z"
+    created: "2023-07-17T07:15:19.939331289Z"
     description: A Helm chart to deploy apigee discovery agent using secrets
     digest: b4acfa722e540730e947885915515bd779f86c1cb63ecb12e5d5f4228a751300
     maintainers:
@@ -16,7 +16,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-11T04:32:36.259364043Z"
+    created: "2023-07-17T07:15:19.938189703Z"
     description: A Helm chart to deploy apigee discovery agent using secrets
     digest: 2da4613c079004c6b89a71736e0527be69bb86269ee65c436e1e292d62a63ae3
     maintainers:
@@ -29,7 +29,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-11T04:32:36.25798011Z"
+    created: "2023-07-17T07:15:19.937298259Z"
     description: A Helm chart for Kubernetes
     digest: 14812b28f3a716f245454064585697ff73a17c940bba6a8f534b9eeca6ef3752
     maintainers:
@@ -43,7 +43,20 @@ entries:
   apigee-traceability:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-11T04:32:36.261831272Z"
+    created: "2023-07-17T07:15:19.949070804Z"
+    description: A Helm chart to deploy apigee discovery agent using secrets
+    digest: 8843f7ebf3b91f8975e65dd706c66167c11403b07449e67749d09f826fb40790
+    maintainers:
+    - email: sosharma@axway.com
+      name: Somdutt Sharma
+    name: apigee-traceability
+    type: application
+    urls:
+    - https://apievangelistsom.github.io/amplify-agents-helm/charts/apigee-traceability-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-07-17T07:15:19.946544776Z"
     description: A Helm chart to deploy apigee discovery agent using secrets
     digest: 0cc131a243cc40b0c44093f4069c373310c241f6b37a1c40965c44f06d1deba3
     maintainers:
@@ -54,4 +67,4 @@ entries:
     urls:
     - https://apievangelistsom.github.io/amplify-agents-helm/charts/apigee-traceability-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-11T04:32:36.256642259Z"
+generated: "2023-07-17T07:15:19.936213723Z"
